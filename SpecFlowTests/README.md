@@ -92,5 +92,29 @@ Test-Path $toolPath
 Get-ChildItem $toolPath
 ```
 
+If you see “Access is denied” when invoking the tool, try:
+
+```powershell
+# Unblock the downloaded executable
+Unblock-File -Path "$env:USERPROFILE\.dotnet\tools\livingdoc.exe"
+
+# Run it directly to confirm
+& "$env:USERPROFILE\.dotnet\tools\livingdoc.exe" --help
+```
+
+Still blocked? Launch an elevated PowerShell or CMD:
+
+```cmd
+"%USERPROFILE%\.dotnet\tools\livingdoc.exe" --help
+```
+
+If the problem persists, check permissions:
+
+```powershell
+icacls "$env:USERPROFILE\.dotnet\tools\livingdoc.exe"
+```
+
+Ensure your account has execute rights (adjust with `icacls` if necessary). Once the tool runs via full path, add the tools folder to PATH and use `livingdoc` normally.
+
 The generated `LivingDoc.html` provides an interactive view of scenarios, steps, and the latest execution results.
 
