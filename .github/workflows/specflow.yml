@@ -1,0 +1,51 @@
+name: SpecFlow CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  specflow-tests:
+    runs-on: ubuntu-latest
+
+    env:
+      API_BASE_URL: https://vhapistg.vaxcare.com
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install SpecFlow LivingDoc CLI
+        run: dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+
+      - name: Update PATH with dotnet tools
+        run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+      - name: Restore dependencies
+        run: dotnet restore SpecFlowTests/SpecFlowTests.csproj
+
+      - name: Run SpecFlow tests
+        run: dotnet test SpecFlowTests/SpecFlowTests.csproj --logger "trx;LogFileName=SpecFlow.trx"
+
+      - name: Generate LivingDoc report
+        run: |
+          mkdir -p SpecFlowTests/TestResults
+          livingdoc test-assembly SpecFlowTests/bin/Debug/net8.0/SpecFlowTests.dll \
+            -t SpecFlowTests/bin/Debug/net8.0/TestExecution.json \
+            --output SpecFlowTests/TestResults/LivingDoc.html
+
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: specflow-results
+          path: |
+            SpecFlowTests/TestResults
+
