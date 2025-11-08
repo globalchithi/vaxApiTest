@@ -1,0 +1,328 @@
+{
+  "testInfo": {
+    "VaxCareApiTests.Tests.PatientsAppointmentCheckoutTests.CheckoutAppointment_Success_SingleVaccine": {
+      "description": "Tests successful checkout of a single vaccine appointment",
+      "testType": "Integration Test",
+      "endpoint": "PUT /api/patients/appointment/{appointmentId}/checkout",
+      "expectedResult": "200 OK with successful checkout"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCheckoutTests.CheckoutAppointment_Success_MultipleVaccines": {
+      "description": "Tests successful checkout of multiple vaccines in one appointment",
+      "testType": "Integration Test", 
+      "endpoint": "PUT /api/patients/appointment/{appointmentId}/checkout",
+      "expectedResult": "200 OK with multiple vaccines processed"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCheckoutTests.CheckoutAppointment_Success_SelfPayPatient": {
+      "description": "Tests successful checkout for a self-pay patient",
+      "testType": "Integration Test",
+      "endpoint": "PUT /api/patients/appointment/{appointmentId}/checkout", 
+      "expectedResult": "200 OK with self-pay checkout processed"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCheckoutTests.CheckoutAppointment_Success_VFCPatient": {
+      "description": "Tests successful checkout for a VFC eligible patient",
+      "testType": "Integration Test",
+      "endpoint": "PUT /api/patients/appointment/{appointmentId}/checkout",
+      "expectedResult": "200 OK with VFC checkout processed"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCheckoutTests.CheckoutAppointment_Success_DifferentDoseSeries": {
+      "description": "Tests successful checkout with different dose series",
+      "testType": "Integration Test",
+      "endpoint": "PUT /api/patients/appointment/{appointmentId}/checkout",
+      "expectedResult": "200 OK with different dose series processed"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCheckoutTests.CheckoutAppointment_Success_EmptyVaccineList": {
+      "description": "Tests successful checkout with empty vaccine list",
+      "testType": "Integration Test",
+      "endpoint": "PUT /api/patients/appointment/{appointmentId}/checkout",
+      "expectedResult": "200 OK with empty vaccine list processed"
+    },
+    "VaxCareApiTests.Tests.InventoryLotInventoryTests.GetInventoryLotInventory_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for inventory lot inventory requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/LotInventory/SimpleOnHand",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.InventoryApiTests.GetInventoryProducts_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for inventory products requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/product/v2",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.SetupCheckDataTests.GetSetupCheckData_ShouldReturnCheckData": {
+      "description": "Tests retrieval of setup check data with proper authentication",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/setup/checkData?partnerId=178764&clinicId=89534",
+      "expectedResult": "200 OK with check data response"
+    },
+    "VaxCareApiTests.Tests.SetupLocationDataTests.GetSetupLocationData_ShouldReturnLocationData": {
+      "description": "Tests retrieval of setup location data for clinic",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/setup/LocationData?clinicId=89534",
+      "expectedResult": "200 OK with location data response"
+    },
+    "VaxCareApiTests.Tests.PatientsStafferShotAdministratorsTests.GetPatientsStafferShotAdministrators_ShouldReturnShotAdministratorsData": {
+      "description": "Tests retrieval of shot administrators data for staff",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/patients/staffer/shotadministrators",
+      "expectedResult": "200 OK with shot administrators data"
+    },
+    "VaxCareApiTests.Tests.InventoryLotNumbersTests.GetInventoryLotNumbers_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for lot numbers requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/lotnumbers?maximumExpirationAgeInDays=365",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.InventoryApiTestsWithReporting.GetInventoryProducts_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for inventory products requests with reporting",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/product/v2",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.PatientsClinicTests.GetPatientsClinic_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for patients clinic requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/clinic",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.PatientsStafferShotAdministratorsTests.GetPatientsStafferShotAdministrators_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for shot administrators requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/staffer/shotadministrators",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentSyncTests.GetPatientsAppointmentSync_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of appointment sync endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/appointment/sync?clinicId=89534&date=2025-10-22&version=2.0",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.PatientsClinicTests.GetPatientsClinic_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of patients clinic endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/clinic",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.InventoryApiTests.GetInventoryProducts_ShouldValidateCurlCommandStructure": {
+      "description": "Validates that curl command structure matches expected format",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/product/v2",
+      "expectedResult": "Curl command structure validated"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentSyncTests.GetPatientsAppointmentSync_ShouldValidateVersionFormats": {
+      "description": "Validates that version parameter formats are correct",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/appointment/sync?version=2.0",
+      "expectedResult": "Version formats validated"
+    },
+    "VaxCareApiTests.Tests.InventoryLotInventoryTests.GetInventoryLotInventory_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of inventory lot inventory endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/LotInventory/SimpleOnHand",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.InventoryApiTests.GetInventoryProducts_ShouldHandleAuthenticationHeaders": {
+      "description": "Tests authentication header handling for inventory products",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/product/v2",
+      "expectedResult": "Authentication headers handled correctly"
+    },
+    "VaxCareApiTests.Tests.InventoryApiTestsWithReporting.GetInventoryProducts_ShouldHandleAuthenticationHeaders": {
+      "description": "Tests authentication header handling for inventory products with reporting enabled",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/product/v2",
+      "expectedResult": "Authentication headers handled correctly with reporting"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentSyncTests.GetPatientsAppointmentSync_ShouldDemonstrateResponseLogging": {
+      "description": "Demonstrates comprehensive response logging for appointment sync",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/appointment/sync",
+      "expectedResult": "Response logging demonstrated"
+    },
+    "VaxCareApiTests.Tests.InventoryLotNumbersTests.GetInventoryLotNumbers_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of lot numbers endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/lotnumbers?maximumExpirationAgeInDays=365",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.InventoryApiTestsWithReporting.GetInventoryProducts_ShouldReturnInventoryProducts": {
+      "description": "Tests retrieval of inventory products with reporting enabled",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/inventory/product/v2",
+      "expectedResult": "200 OK with inventory products data"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentSyncTests.GetPatientsAppointmentSync_ShouldReturnAppointmentData": {
+      "description": "Tests retrieval of appointment sync data",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/patients/appointment/sync?clinicId=89534&date=2025-10-22&version=2.0",
+      "expectedResult": "200 OK with appointment data"
+    },
+    "VaxCareApiTests.Tests.SetupCheckDataTests.GetSetupCheckData_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for setup check data requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/setup/checkData?partnerId=178764&clinicId=89534",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.InventoryApiTestsWithReporting.GetInventoryProducts_ShouldValidateCurlCommandStructure": {
+      "description": "Validates curl command structure for inventory products with reporting",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/inventory/product/v2",
+      "expectedResult": "Curl command structure validated"
+    },
+    "VaxCareApiTests.Tests.SetupCheckDataTests.GetSetupCheckData_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of setup check data endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/setup/checkData?partnerId=178764&clinicId=89534",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentSyncTests.GetPatientsAppointmentSync_ShouldValidateClinicIdFormats": {
+      "description": "Validates that clinic ID parameter formats are correct",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/appointment/sync?clinicId=89534",
+      "expectedResult": "Clinic ID formats validated"
+    },
+    "VaxCareApiTests.Tests.SetupUsersPartnerLevelTests.GetSetupUsersPartnerLevel_ShouldReturnUsersPartnerLevelData": {
+      "description": "Tests retrieval of users partner level data",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/setup/users/partnerlevel",
+      "expectedResult": "200 OK with users partner level data"
+    },
+    "VaxCareApiTests.Tests.SetupUsersPartnerLevelTests.GetSetupUsersPartnerLevel_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of users partner level endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/setup/users/partnerlevel",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.SetupUsersPartnerLevelTests.GetSetupUsersPartnerLevel_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for users partner level requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/setup/users/partnerlevel",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.PatientsStafferProvidersTests.GetPatientsStafferProviders_ShouldReturnProvidersData": {
+      "description": "Tests retrieval of staffer providers data",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/patients/staffer/providers",
+      "expectedResult": "200 OK with providers data"
+    },
+    "VaxCareApiTests.Tests.PatientsStafferProvidersTests.GetPatientsStafferProviders_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of staffer providers endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/staffer/providers",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.PatientsStafferProvidersTests.GetPatientsStafferProviders_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for staffer providers requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/staffer/providers",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.PatientsClinicTests.GetPatientsClinic_ShouldReturnClinicData": {
+      "description": "Tests retrieval of patients clinic data",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/patients/clinic",
+      "expectedResult": "200 OK with clinic data"
+    },
+    "VaxCareApiTests.Tests.InventoryLotInventoryTests.GetInventoryLotInventory_ShouldReturnLotInventoryData": {
+      "description": "Tests retrieval of inventory lot inventory data",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/inventory/LotInventory/SimpleOnHand",
+      "expectedResult": "200 OK with lot inventory data"
+    },
+    "VaxCareApiTests.Tests.InventoryApiTests.GetInventoryProducts_ShouldReturnInventoryProducts": {
+      "description": "Tests retrieval of inventory products data",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/inventory/product/v2",
+      "expectedResult": "200 OK with inventory products data"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentSyncTests.GetPatientsAppointmentSync_ShouldValidateQueryParameters": {
+      "description": "Validates that query parameters are properly formatted",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/appointment/sync?clinicId=89534&date=2025-10-22&version=2.0",
+      "expectedResult": "Query parameters validated"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentSyncTests.GetPatientsAppointmentSync_ShouldValidateDateFormats": {
+      "description": "Validates that date parameter formats are correct",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/appointment/sync?date=2025-10-22",
+      "expectedResult": "Date formats validated"
+    },
+    "VaxCareApiTests.Tests.SetupLocationDataTests.GetSetupLocationData_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of setup location data endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/setup/LocationData?clinicId=89534",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.PatientsInsuranceByStateTests.GetPatientsInsuranceByState_ShouldReturnInsuranceData": {
+      "description": "Tests retrieval of patients insurance data by state",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/patients/insurance/bystate/FL?contractedOnly=false",
+      "expectedResult": "200 OK with insurance data"
+    },
+    "VaxCareApiTests.Tests.PatientsInsuranceByStateTests.GetPatientsInsuranceByState_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of insurance by state endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/insurance/bystate/FL?contractedOnly=false",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.PatientsInsuranceByStateTests.GetPatientsInsuranceByState_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for insurance by state requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/insurance/bystate/FL?contractedOnly=false",
+      "expectedResult": "All required headers validated"
+    },
+    "VaxCareApiTests.Tests.InventoryLotNumbersTests.GetInventoryLotNumbers_ShouldReturnLotNumbersData": {
+      "description": "Tests retrieval of inventory lot numbers data",
+      "testType": "Integration Test",
+      "endpoint": "GET /api/inventory/lotnumbers?maximumExpirationAgeInDays=365",
+      "expectedResult": "200 OK with lot numbers data"
+    },
+    "VaxCareApiTests.Tests.PatientsStafferShotAdministratorsTests.GetPatientsStafferShotAdministrators_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of staffer shot administrators endpoint",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/patients/staffer/shotadministrators",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCreateTests.CreateAppointment_ShouldHandleUniquePatientNames": {
+      "description": "Tests appointment creation with unique patient names to avoid conflicts",
+      "testType": "Integration Test",
+      "endpoint": "POST /api/patients/appointment",
+      "expectedResult": "200 OK with unique patient appointment created"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCheckoutTests.CheckoutAppointment_ShouldHandleInvalidAppointmentId": {
+      "description": "Tests checkout handling with invalid appointment ID",
+      "testType": "Integration Test",
+      "endpoint": "PUT /api/patients/appointment/{appointmentId}/checkout",
+      "expectedResult": "400 Bad Request or appropriate error for invalid appointment ID"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCheckoutTests.CheckoutAppointment_ShouldValidateRequiredFields": {
+      "description": "Validates that all required fields are present for checkout requests",
+      "testType": "Unit Test",
+      "endpoint": "PUT /api/patients/appointment/{appointmentId}/checkout",
+      "expectedResult": "Required fields validation completed"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCheckoutTests.CheckoutAppointment_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of checkout endpoint",
+      "testType": "Unit Test",
+      "endpoint": "PUT /api/patients/appointment/{appointmentId}/checkout",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCreateTests.CreateAppointment_ShouldValidateEndpointStructure": {
+      "description": "Validates the structure and format of appointment creation endpoint",
+      "testType": "Unit Test",
+      "endpoint": "POST /api/patients/appointment",
+      "expectedResult": "Endpoint structure validated"
+    },
+    "VaxCareApiTests.Tests.PatientsAppointmentCreateTests.CreateAppointment_ShouldReturnAppointmentId": {
+      "description": "Tests successful appointment creation and returns appointment ID",
+      "testType": "Integration Test",
+      "endpoint": "POST /api/patients/appointment",
+      "expectedResult": "200 OK with appointment ID returned"
+    },
+    "VaxCareApiTests.Tests.SetupLocationDataTests.GetSetupLocationData_ShouldValidateRequiredHeaders": {
+      "description": "Validates that all required headers are present for setup location data requests",
+      "testType": "Unit Test",
+      "endpoint": "GET /api/setup/LocationData?clinicId=89534",
+      "expectedResult": "All required headers validated"
+    }
+  }
+}
