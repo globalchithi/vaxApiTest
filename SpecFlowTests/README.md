@@ -58,7 +58,15 @@ API_BASE_URL=https://vhapistg.vaxcare.com dotnet test SpecFlowTests/SpecFlowTest
   && open SpecFlowTests/TestResults/LivingDoc.html
 ```
 
-PowerShell equivalent on Windows:
+PowerShell equivalent on Windows (add `%USERPROFILE%\.dotnet\tools` to PATH first so `livingdoc` resolves):
+
+```powershell
+# current session
+$env:PATH = "$env:USERPROFILE\.dotnet\tools;$env:PATH"
+
+# persist for future sessions (adds to user PATH)
+setx PATH "$env:USERPROFILE\.dotnet\tools;$env:PATH"
+```
 
 ```powershell
 dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
