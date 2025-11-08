@@ -30,6 +30,21 @@ This directory contains the SpecFlow-based API test framework that expresses end
 
    Set `API_BASE_URL` (or `ApiConfiguration:BaseUrl` in `appsettings.json`) to point at your environment under test. Additional configuration values can be supplied via `appsettings.{Environment}.json` files or environment variables. Use `TEST_ENVIRONMENT=QA` to load `appsettings.QA.json`, etc.
 
+### Python helper
+
+If you prefer Python, the repository includes `run-all-tests.py`, which wraps the full workflow (dotnet test + LivingDoc):
+
+```bash
+python run-all-tests.py --base-url https://vhapistg.vaxcare.com --open-report
+```
+
+Flags:
+- `--base-url` (default `https://vhapistg.vaxcare.com`)
+- `--environment` sets `TEST_ENVIRONMENT`
+- `--configuration` / `--framework` override build output paths
+- `--no-report` skips LivingDoc generation
+- `--open-report` launches the HTML after generation
+
 ## Customising scenarios
 
 - Add new `.feature` files under `Features/` and SpecFlow will generate strongly typed glue code on build.
@@ -115,6 +130,14 @@ icacls "$env:USERPROFILE\.dotnet\tools\livingdoc.exe"
 ```
 
 Ensure your account has execute rights (adjust with `icacls` if necessary). Once the tool runs via full path, add the tools folder to PATH and use `livingdoc` normally.
+
+As a last resort, you can call LivingDoc through the dotnet tool host (bypasses direct EXE execution):
+
+```powershell
+dotnet tool run livingdoc -- test-assembly SpecFlowTests/bin/Debug/net8.0/SpecFlowTests.dll `
+    -t SpecFlowTests/bin/Debug/net8.0/TestExecution.json `
+    --output SpecFlowTests/TestResults/LivingDoc.html
+```
 
 The generated `LivingDoc.html` provides an interactive view of scenarios, steps, and the latest execution results.
 
