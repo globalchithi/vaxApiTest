@@ -78,5 +78,19 @@ livingdoc test-assembly SpecFlowTests/bin/Debug/net8.0/SpecFlowTests.dll `
 Start-Process "SpecFlowTests\TestResults\LivingDoc.html"
 ```
 
+Verify the tools folder and `livingdoc.exe`:
+
+```powershell
+# Locate the dotnet global tools folder
+$toolPath = Join-Path $env:USERPROFILE ".dotnet\tools"
+Write-Host "Tools folder: $toolPath"
+
+# Confirm it exists
+Test-Path $toolPath
+
+# Inspect the contents (should list livingdoc.exe)
+Get-ChildItem $toolPath
+```
+
 The generated `LivingDoc.html` provides an interactive view of scenarios, steps, and the latest execution results.
 
