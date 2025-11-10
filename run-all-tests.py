@@ -76,6 +76,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"\n❌ dotnet test failed: {exc}")
         return 1
 
+    custom_report = ROOT / "SpecFlowTests" / "TestResults" / "CustomReport.html"
+
     if args.no_report:
         print("\nℹ️  Report generation skipped (--no-report).")
         return 0
@@ -116,14 +118,38 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"\n✅ LivingDoc report generated at {output_html}")
 
+    # Generate custom HTML report via C#
+    try:
+        run_command(
+            [
+                "dotnet",
+                "run",
+                "--project",
+                str(ROOT / "tools" / "SpecFlowReportGenerator" / "SpecFlowReportGenerator.csproj"),
+                "--",
+                str(test_execution_json),
+                str(custom_report),
+            ],
+            env=env,
+        )
+        print(f"✅ Custom report generated at {custom_report}")
+    except RuntimeError as exc:
+        print(f"\n⚠️  Custom report generation failed: {exc}")
+
     if args.open_report:
         try:
             if sys.platform.startswith("darwin"):
                 run_command(["open", str(output_html)])
+                if custom_report.exists():
+                    run_command(["open", str(custom_report)])
             elif os.name == "nt":
                 os.startfile(str(output_html))  # type: ignore[arg-type]
+                if custom_report.exists():
+                    os.startfile(str(custom_report))  # type: ignore[arg-type]
             else:
                 run_command(["xdg-open", str(output_html)])
+                if custom_report.exists():
+                    run_command(["xdg-open", str(custom_report)])
         except Exception as exc:  # pragma: no cover - best-effort
             print(f"⚠️  Failed to open report automatically: {exc}")
 

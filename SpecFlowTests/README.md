@@ -32,7 +32,7 @@ This directory contains the SpecFlow-based API test framework that expresses end
 
 ### Python helper
 
-If you prefer Python, the repository includes `run-all-tests.py`, which wraps the full workflow (dotnet test + LivingDoc):
+If you prefer Python, the repository includes `run-all-tests.py`, which wraps the full workflow:
 
 ```bash
 python run-all-tests.py --base-url https://vhapistg.vaxcare.com --open-report
@@ -43,7 +43,22 @@ Flags:
 - `--environment` sets `TEST_ENVIRONMENT`
 - `--configuration` / `--framework` override build output paths
 - `--no-report` skips LivingDoc generation
-- `--open-report` launches the HTML after generation
+- `--open-report` launches the LivingDoc and custom HTML reports after generation
+
+### Custom C# report generator
+
+The repository also includes a lightweight C# report generator (`tools/SpecFlowReportGenerator`). It reads `TestExecution.json` and produces a simplified HTML summary (`SpecFlowTests/TestResults/CustomReport.html`).
+
+Manual usage:
+
+```bash
+dotnet test SpecFlowTests/SpecFlowTests.csproj
+dotnet run --project tools/SpecFlowReportGenerator/SpecFlowReportGenerator.csproj -- \
+  SpecFlowTests/bin/Debug/net8.0/TestExecution.json \
+  SpecFlowTests/TestResults/CustomReport.html
+```
+
+The Python script and GitHub workflow automatically invoke this generator after `dotnet test`.
 
 ## Customising scenarios
 

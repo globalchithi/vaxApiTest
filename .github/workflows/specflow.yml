@@ -42,6 +42,9 @@ jobs:
             -t SpecFlowTests/bin/Debug/net8.0/TestExecution.json \
             --output SpecFlowTests/TestResults/LivingDoc.html
 
+      - name: Generate custom SpecFlow report
+        run: dotnet run --project tools/SpecFlowReportGenerator/SpecFlowReportGenerator.csproj -- SpecFlowTests/bin/Debug/net8.0/TestExecution.json SpecFlowTests/TestResults/CustomReport.html
+
       - name: Upload test artifacts
         uses: actions/upload-artifact@v4
         with:
