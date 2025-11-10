@@ -23,6 +23,10 @@ var json = await File.ReadAllTextAsync(testExecutionFile);
 using var document = JsonDocument.Parse(json);
 
 var summary = BuildSummary(document.RootElement);
+if (summary.Features.Count == 0)
+{
+    Console.Error.WriteLine("⚠️  No features found in TestExecution.json. Did the SpecFlow run produce results?");
+}
 
 var html = BuildHtml(summary);
 Directory.CreateDirectory(Path.GetDirectoryName(reportFile)!);
@@ -69,7 +73,20 @@ static string ResolveOutputPath(string? output)
 
 static TestRunSummary BuildSummary(JsonElement root)
 {
-    if (!root.TryGetProperty("testRun", out var testRun))
+    JsonElement testRun;
+
+    if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("testRun", out var nestedTestRun))
+    {
+        testRun = nestedTestRun;
+    }
+    else if (root.ValueKind == JsonValueKind.Object &&
+             root.TryGetProperty("features", out _) &&
+             root.TryGetProperty("created", out _))
+    {
+        // Already at testRun level
+        testRun = root;
+    }
+    else
     {
         throw new InvalidOperationException("Invalid TestExecution.json format: missing testRun element.");
     }
