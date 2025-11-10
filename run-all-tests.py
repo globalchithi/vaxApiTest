@@ -136,16 +136,44 @@ def main(argv: list[str] | None = None) -> int:
     except RuntimeError as exc:
         print(f"\n⚠️  Custom report generation failed: {exc}")
 
+    # Generate TRX summary (works even if TestExecution.json missing)
+    trx_file = ROOT / "SpecFlowTests" / "TestResults" / "SpecFlow.trx"
+    if trx_file.exists():
+        try:
+            run_command(
+                [
+                    "dotnet",
+                    "run",
+                    "--project",
+                    str(ROOT / "tools" / "TrxReportGenerator" / "TrxReportGenerator.csproj"),
+                    "--",
+                    str(trx_file),
+                    str(ROOT / "SpecFlowTests" / "TestResults" / "TrxSummary.html"),
+                ],
+                env=env,
+            )
+            print(f"✅ TRX summary report generated at {ROOT / 'SpecFlowTests' / 'TestResults' / 'TrxSummary.html'}")
+        except RuntimeError as exc:
+            print(f"\n⚠️  TRX summary generation failed: {exc}")
+    else:
+        print("⚠️  No SpecFlow.trx found; skipping TRX summary.")
+
     if args.open_report:
         try:
             if sys.platform.startswith("darwin"):
                 run_command(["open", str(output_html)])
                 if custom_report.exists():
                     run_command(["open", str(custom_report)])
+                trx_summary = ROOT / "SpecFlowTests" / "TestResults" / "TrxSummary.html"
+                if trx_summary.exists():
+                    run_command(["open", str(trx_summary)])
             elif os.name == "nt":
                 os.startfile(str(output_html))  # type: ignore[arg-type]
                 if custom_report.exists():
                     os.startfile(str(custom_report))  # type: ignore[arg-type]
+                trx_summary = ROOT / "SpecFlowTests" / "TestResults" / "TrxSummary.html"
+                if trx_summary.exists():
+                    os.startfile(str(trx_summary))  # type: ignore[arg-type]
             else:
                 run_command(["xdg-open", str(output_html)])
                 if custom_report.exists():

@@ -75,6 +75,19 @@ Start-Process "SpecFlowTests\TestResults\CustomReport_SingleScenario.html"
 
 The Python script and GitHub workflow automatically invoke this generator after `dotnet test`.
 
+### TRX summary report (works even if execution aborts)
+
+If you simply need a high-level view (including failed/aborted runs), generate the TRX summary HTML:
+
+```bash
+dotnet test SpecFlowTests/SpecFlowTests.csproj --logger "trx;LogFileName=SpecFlow.trx" || true
+dotnet run --project tools/TrxReportGenerator/TrxReportGenerator.csproj -- \
+  SpecFlowTests/TestResults/SpecFlow.trx \
+  SpecFlowTests/TestResults/TrxSummary.html
+```
+
+This works even when `TestExecution.json` is missing.
+
 ## Customising scenarios
 
 - Add new `.feature` files under `Features/` and SpecFlow will generate strongly typed glue code on build.
