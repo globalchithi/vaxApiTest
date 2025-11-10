@@ -85,7 +85,7 @@ static TestRunSummary BuildSummary(JsonElement root)
     {
         var feature = new FeatureReport
         {
-            Name = featureElement.TryGetProperty("name", out var nameEl) ? nameEl.GetString() ?? "Unnamed feature" : "Unnamed feature",
+            Name = featureElement.TryGetProperty("name", out var featureNameEl) ? featureNameEl.GetString() ?? "Unnamed feature" : "Unnamed feature",
             Description = featureElement.TryGetProperty("description", out var descEl) ? descEl.GetString() ?? string.Empty : string.Empty
         };
 
@@ -125,7 +125,7 @@ static ScenarioReport ParseScenario(JsonElement scenarioElement)
 {
     var scenario = new ScenarioReport
     {
-        Name = scenarioElement.TryGetProperty("name", out var nameEl) ? nameEl.GetString() ?? "Unnamed scenario" : "Unnamed scenario",
+        Name = scenarioElement.TryGetProperty("name", out var scenarioNameEl) ? scenarioNameEl.GetString() ?? "Unnamed scenario" : "Unnamed scenario",
         Status = ExtractStatus(scenarioElement),
         Duration = ExtractDuration(scenarioElement)
     };
@@ -136,7 +136,7 @@ static ScenarioReport ParseScenario(JsonElement scenarioElement)
         {
             var step = new StepReport
             {
-                Name = stepElement.TryGetProperty("name", out var nameEl) ? nameEl.GetString() ?? "Unnamed step" : "Unnamed step",
+                Name = stepElement.TryGetProperty("name", out var stepNameEl) ? stepNameEl.GetString() ?? "Unnamed step" : "Unnamed step",
                 Keyword = stepElement.TryGetProperty("keyword", out var keywordEl) ? keywordEl.GetString() ?? string.Empty : string.Empty,
                 Status = ExtractStatus(stepElement),
                 Duration = ExtractDuration(stepElement)
