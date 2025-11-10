@@ -49,13 +49,28 @@ Flags:
 
 The repository also includes a lightweight C# report generator (`tools/SpecFlowReportGenerator`). It reads `TestExecution.json` and produces a simplified HTML summary (`SpecFlowTests/TestResults/CustomReport.html`).
 
-Manual usage:
+Manual usage (full suite):
 
 ```bash
 dotnet test SpecFlowTests/SpecFlowTests.csproj
 dotnet run --project tools/SpecFlowReportGenerator/SpecFlowReportGenerator.csproj -- \
   SpecFlowTests/bin/Debug/net8.0/TestExecution.json \
   SpecFlowTests/TestResults/CustomReport.html
+```
+
+Single scenario example (PowerShell; adjust the filter to match the generated scenario name):
+
+```powershell
+$env:API_BASE_URL = "https://vhapistg.vaxcare.com"
+dotnet test SpecFlowTests/SpecFlowTests.csproj `
+    --filter "FullyQualifiedName~PatientsClinic_APISmokeTestsFeature.RetrievePatientsClinicData" `
+    --logger "trx;LogFileName=SingleScenario.trx"
+
+dotnet run --project tools\SpecFlowReportGenerator\SpecFlowReportGenerator.csproj -- `
+    SpecFlowTests\bin\Debug\net8.0\TestExecution.json `
+    SpecFlowTests\TestResults\CustomReport_SingleScenario.html
+
+Start-Process "SpecFlowTests\TestResults\CustomReport_SingleScenario.html"
 ```
 
 The Python script and GitHub workflow automatically invoke this generator after `dotnet test`.
